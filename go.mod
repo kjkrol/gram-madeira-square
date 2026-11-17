@@ -6,7 +6,7 @@ require (
 	github.com/kjkrol/aabbworld v1.21.2
 	github.com/kjkrol/ceremony v0.3.3
 	github.com/kjkrol/goke/v3 v3.6.1
-	github.com/kjkrol/gram v0.21.1-0.20261117151830-c95dcedcfc6c
+	github.com/kjkrol/gram v0.21.1-0.20261117203202-c674cbb8497d
 	go.yaml.in/yaml/v3 v3.0.5
 	golang.org/x/image v0.46.0
 )

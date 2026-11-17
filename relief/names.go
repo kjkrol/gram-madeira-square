@@ -101,7 +101,7 @@ const (
 
 	// SheetsVersion is how the fields are planted: a change to the forests', the settlements' or
 	// their parts' rules or looks changes it, or the sheets kept from an earlier run show the old.
-	SheetsVersion = "madeira-5"
+	SheetsVersion = "madeira-6"
 	// RoutesVersion is how the steps are priced: a change to the mobility, the kinds' paces or
 	// the unit kinds' bodies changes it, or the hierarchy kept from an earlier run climbs the
 	// old prices.

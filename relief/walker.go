@@ -54,6 +54,8 @@ type walker struct {
 	member string
 	// its banner far off; none where zero
 	banner world.BannerStyle
+	// the way it faces as it is made, x running east; nowhere where zero
+	facing geom.Vec
 }
 
 var (
@@ -84,6 +86,9 @@ func (wk walker) Define(b *board.Plugin) {
 	extra := append(looking(), ceremony.Plays(plays...), leaping())
 	if wk.ordered {
 		extra = append(extra, ordered())
+	}
+	if wk.facing != (geom.Vec{}) {
+		extra = append(extra, comp.Const(world.Velocity{Dir: wk.facing}))
 	}
 	domain := cell.Land
 	if wk.highland {
