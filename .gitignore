@@ -1,0 +1,37 @@
+# Go build cache / artifacts
+bin/
+*.exe
+*.exe~
+*.dll
+*.so
+*.dylib
+
+# Compiled binaries `go build ./...` drops at the root, named after their package directory:
+# every real root-level file has an extension or is one of the few excepted below
+/*
+!/*.*
+!/*/
+!/Makefile
+!/LICENSE
+
+# Test binaries and temporary build output
+*.test
+*.out
+
+# IDE / Editor
+.vscode/
+.idea/
+*.swp
+*.swo
+.DS_Store
+
+# asdf
+.tool-versions
+
+# gram save files
+*.game.save
+*.game.*.save
+
+# A worktree's workspace file, which the root rule above would otherwise keep
+go.work
+go.work.sum

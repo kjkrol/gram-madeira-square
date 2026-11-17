@@ -1,0 +1,33 @@
+name: Go Quality Check
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    # as the Makefile: aabbworld's pair sweep eight boxes at a time where the CPU has AVX2
+    env:
+      GOEXPERIMENT: simd
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Set up Go
+        uses: actions/setup-go@v5
+        with:
+          go-version: "1.27.0"
+          check-latest: true
+          cache: true
+
+      - name: Install dependencies
+        run: go mod download
+
+      - name: Build
+        run: go build ./...
+
+      - name: Run Tests
+        run: xvfb-run -a go test -v -race ./...
