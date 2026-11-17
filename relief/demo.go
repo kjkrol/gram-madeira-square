@@ -408,7 +408,7 @@ func (a *arena) defineFigures() {
 	a.board.Figures(
 		walker{kind: UnitKind, color: playerColor, ordered: true},
 		walker{kind: PlateauKind, color: playerColor, highland: true, member: MemberRole},
-		walker{kind: LookoutKind, color: playerColor, highland: true},
+		walker{kind: LookoutKind, color: playerColor, highland: true, facing: geom.NewVec(1, 0)},
 		walker{
 			kind:    RivalKind,
 			color:   rivalColor,
