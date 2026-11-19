@@ -153,6 +153,7 @@ func (wagon) Define(b *board.Plugin) {
 func (wagon) Look(a *world.Atlas, w *world.Plugin) {
 	a.Add(kind.Named[wagonRow](w.Kinds(), WagonKind), wagonPx, cart).
 		Upright().
+		Uncovered().
 		Styled(minimap.Mark{Color: wagonColor, Size: 4})
 }
 
@@ -186,5 +187,6 @@ func (porter) Define(b *board.Plugin) {
 func (p porter) Look(a *world.Atlas, w *world.Plugin) {
 	a.Add(kind.Named[porterRow](w.Kinds(), PorterKind), walkerPx, render.Solid(p.color)).
 		Upright().
+		Uncovered().
 		Styled(minimap.Mark{Color: p.color, Size: 3})
 }

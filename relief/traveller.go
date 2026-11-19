@@ -54,6 +54,7 @@ func (traveller) Define(b *board.Plugin) {
 func (t traveller) Look(a *world.Atlas, w *world.Plugin) {
 	a.Add(kind.Named[travellerRow](w.Kinds(), TravellerKind), iconPx, render.Solid(t.color)).
 		Upright().
+		Uncovered().
 		Styled(selection.Highlight{Line: t.color, Width: 2}).
 		Styled(minimap.Mark{Color: t.color, Size: 5}).
 		Styled(world.BannerStyle{Fill: t.color}).

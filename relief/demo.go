@@ -162,17 +162,18 @@ func main() {
 			},
 			Sectors: world.SectorsCfg{Buckets: Buckets},
 			LOD: lod.Ladder{
-				// L2 from a tree of 12 pixels, L3 down to 8, L4, the sheet, under that
-				Scales: [lod.Levels - 1]float32{0, 0, 0.6, 0.4, 0.12, 0},
+				// the close scale from a tree of 60 pixels, its L0 of 120: there the trees stand
+				// whole whatever the frame budget; L2 from one of 12, L3 down to 8, L4, the sheet,
+				// under that
+				Scales: [lod.Levels - 1]float32{5, 2.5, 0.6, 0.4, 0.12, 0},
 				Sight:  scale.Units(30_000),
 				Fog:    scale.Units(6_000),
 				Fold:   FoldAfter,
 			},
-			Heights:  true,
-			Far:      world.Banners,
-			Counts:   true,
-			Canopies: true,
-			Sheets:   sheets(),
+			Heights: true,
+			Far:     world.Banners,
+			Counts:  true,
+			Sheets:  sheets(),
 		}).
 		Plugins(a.makePlugins).
 		Figures(a.defineFigures).
@@ -276,7 +277,7 @@ func (a *arena) makePlugins(w *world.Plugin) {
 		Cell:        CellSize,
 		HeightUnit:  1,
 		Cage:        a.topography.Read(0),
-		Levers:      []cameras.Lever{a.light.Write(), a.atmosphere.Write()},
+		Levers:      []cameras.Lever{a.world.Bodies(), a.light.Write(), a.atmosphere.Write()},
 		Tactical:    cameras.Knobs{Strategy: cameras.InLayers, Layers: true},
 		Riding:      cameras.Knobs{Strategy: cameras.InLayers, Layers: true},
 		Arm:         cameras.Arm{Pitch: 20, Distance: 3, Aim: 1, Tilts: true, Zooms: true},
