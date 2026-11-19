@@ -103,6 +103,7 @@ func leaping() comp.Comp { return comp.Const(gravity.Body{Leap: scale.Figure(1.5
 func (wk walker) Look(a *world.Atlas, w *world.Plugin) {
 	slot := a.Add(kind.Named[unitRow](w.Kinds(), wk.kind), walkerPx, render.Solid(wk.color)).
 		Upright().
+		Uncovered().
 		Styled(selection.Highlight{Line: wk.color, Width: 2}).
 		Styled(minimap.Mark{Color: wk.color, Size: 5})
 	if wk.banner != (world.BannerStyle{}) {
