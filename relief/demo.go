@@ -40,6 +40,7 @@ import (
 	"github.com/kjkrol/gram/plugins/driving"
 	"github.com/kjkrol/gram/plugins/forest"
 	"github.com/kjkrol/gram/plugins/gravity"
+	"github.com/kjkrol/gram/plugins/interiors"
 	"github.com/kjkrol/gram/plugins/light"
 	"github.com/kjkrol/gram/plugins/minimap"
 	"github.com/kjkrol/gram/plugins/motion"
@@ -101,6 +102,7 @@ type arena struct {
 	topography *topography.Plugin
 	bridges    *bridges.Plugin
 	tunnels    *underground.Plugin
+	interiors  *interiors.Plugin
 	forest     *forest.Plugin
 	buildings  *buildings.Plugin
 	selection  *selection.Plugin
@@ -235,6 +237,7 @@ func (a *arena) makePlugins(w *world.Plugin) {
 	}}).WithShaper(a.topography.Write())
 	a.tunnels = underground.NewPlugin(a.world, a.board, underground.Config{Rules: tunnelling}).
 		WithShaper(a.topography.Write())
+	a.interiors = interiors.NewPlugin(a.world, a.board)
 	a.forest = forest.NewPlugin(a.world, a.board)
 	a.buildings = buildings.NewPlugin(a.world, a.board)
 	a.selection = selection.NewPlugin(a.world)
@@ -515,6 +518,7 @@ func (a *arena) update(ctx goke.RunCtx, d time.Duration) {
 	a.collision.RunPlan(ctx, d)
 	a.gravity.RunPlan(ctx, d)
 	a.board.RunPlan(ctx, d)
+	a.interiors.RunPlan(ctx, d)
 	a.nav.RunPlan(ctx, d)
 	a.driving.RunPlan(ctx, d)
 	a.vision.RunPlan(ctx, d)
