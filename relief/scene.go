@@ -40,17 +40,20 @@ var cellColors = map[string]color.RGBA{
 }
 
 var (
-	deckColor    = color.RGBA{R: 115, G: 85, B: 55, A: 255}
-	railColor    = color.RGBA{R: 70, G: 50, B: 35, A: 255}
-	stoneColor   = color.RGBA{R: 150, G: 145, B: 135, A: 255}
-	pierColor    = color.RGBA{R: 160, G: 150, B: 135, A: 255}
-	lanternGlow  = color.RGBA{R: 255, G: 200, B: 110, A: 255}
-	lanternColor = render.Light{1, 0.75, 0.4}
-	wallColor    = color.RGBA{R: 235, G: 230, B: 218, A: 255}
-	roofColor    = color.RGBA{R: 190, G: 92, B: 60, A: 255}
-	wagonColor   = color.RGBA{R: 120, G: 80, B: 45, A: 255}
-	shoalColor   = color.RGBA{R: 64, G: 164, B: 176, A: 255}
-	wheelColor   = color.RGBA{R: 50, G: 38, B: 28, A: 255}
+	deckColor       = color.RGBA{R: 115, G: 85, B: 55, A: 255}
+	railColor       = color.RGBA{R: 70, G: 50, B: 35, A: 255}
+	stoneColor      = color.RGBA{R: 150, G: 145, B: 135, A: 255}
+	pierColor       = color.RGBA{R: 160, G: 150, B: 135, A: 255}
+	lanternGlow     = color.RGBA{R: 255, G: 200, B: 110, A: 255}
+	lanternColor    = render.Light{1, 0.75, 0.4}
+	wallColor       = color.RGBA{R: 235, G: 230, B: 218, A: 255}
+	roofColor       = color.RGBA{R: 190, G: 92, B: 60, A: 255}
+	wagonColor      = color.RGBA{R: 120, G: 80, B: 45, A: 255}
+	shoalColor      = color.RGBA{R: 64, G: 164, B: 176, A: 255}
+	wheelColor      = color.RGBA{R: 50, G: 38, B: 28, A: 255}
+	pierStoneColor  = color.RGBA{R: 132, G: 124, B: 110, A: 255}
+	wagonGrainColor = color.RGBA{R: 98, G: 64, B: 36, A: 255}
+	canvasColor     = color.RGBA{R: 226, G: 216, B: 190, A: 255}
 )
 
 var (

@@ -18,7 +18,6 @@ import (
 	"github.com/kjkrol/gram/plugins/forest"
 	"github.com/kjkrol/gram/plugins/light"
 	"github.com/kjkrol/gram/plugins/world"
-	"github.com/kjkrol/gram/render"
 )
 
 // the plots a sector of a settlement may hold a lamp or a tree at: its cells' quarters
@@ -252,14 +251,10 @@ func (lamp) Define(b *board.Plugin) {
 		}),
 		comp.Const(world.Z{Height: scale.Figure(4)}),
 		comp.Const(light.Source{Color: lanternColor, Strength: 1.5, Reach: scale.Figure(10)}),
-		comp.Const(light.Shadow{Cast: light.NoShadow, Take: render.Shines}),
+		comp.Const(light.Shadow{Cast: light.NoShadow}),
 		ceremony.Plays(w.Roles().Named(LampRole))))
 }
 
 func (lamp) Look(a *world.Atlas, w *world.Plugin) {
-	a.Add(kind.Named[lampRow](w.Kinds(), LampKind), 8, func(dst *render.Canvas, size int) {
-		s := float32(size)
-		dst.FillRect(s*0.4, s*0.5, s*0.2, s*0.5, pierColor)
-		dst.FillCircle(s/2, s*0.3, s*0.3, lanternGlow)
-	})
+	a.AddBody(kind.Named[lampRow](w.Kinds(), LampKind), 16, lampBody())
 }

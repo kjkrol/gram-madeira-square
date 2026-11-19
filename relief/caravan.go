@@ -151,18 +151,41 @@ func (wagon) Define(b *board.Plugin) {
 }
 
 func (wagon) Look(a *world.Atlas, w *world.Plugin) {
-	a.Add(kind.Named[wagonRow](w.Kinds(), WagonKind), wagonPx, cart).
-		Upright().
+	a.AddBody(kind.Named[wagonRow](w.Kinds(), WagonKind), wagonPx, cart()).
 		Uncovered().
 		Styled(minimap.Mark{Color: wagonColor, Size: 4})
 }
 
-// a cart seen from its side, its two wheels under it
-func cart(dst *render.Canvas, size int) {
-	s := float32(size)
-	dst.FillRect(0, 0, s, s*0.75, wagonColor)
-	dst.FillCircle(s*0.25, s*0.8, s*0.18, wheelColor)
-	dst.FillCircle(s*0.75, s*0.8, s*0.18, wheelColor)
+// cart is a bed on two wheels under a load covered in canvas, its shafts ahead, running along x
+func cart() world.Body {
+	m := scale.Figure
+	at := func(x, y, z float32) [3]float32 { return [3]float32{m(x), m(y), m(z)} }
+	parts := []world.Part{
+		{Shape: world.Box, From: at(-0.6, 0, 0.575), To: at(0.6, 0, 0.575), Wide: m(0.9),
+			Tip: m(0.25)},
+		{Shape: world.Box, From: at(-0.5, 0, 0.95), To: at(0.35, 0, 0.95), Wide: m(0.8),
+			Tip: m(0.5), Paint: 1},
+		{Shape: world.Cone, From: at(-0.52, 0, 1.2), To: at(0.37, 0, 1.2), Wide: m(0.76),
+			Tip: m(0.76), Paint: 2},
+	}
+	for _, y := range []float32{-1, 1} {
+		parts = append(parts,
+			world.Part{Shape: world.Cone, From: at(0, 0.45*y, 0.4), To: at(0, 0.55*y, 0.4),
+				Wide: m(0.8), Tip: m(0.8), Paint: 3},
+			world.Part{Shape: world.Box, From: at(0.6, 0.35*y, 0.6), To: at(0.72, 0.35*y, 0.55),
+				Wide: m(0.05), Tip: m(0.05)})
+	}
+	return world.Body{
+		Wide:  wagonWide,
+		Tall:  wagonTall,
+		Parts: parts,
+		Paints: []world.Paint{
+			{Colour: wagonColor, Dots: wagonGrainColor},
+			{Colour: deckColor},
+			{Colour: canvasColor},
+			{Colour: wheelColor},
+		},
+	}
 }
 
 type porterRow struct{}
