@@ -30,7 +30,25 @@ func (bridge) Look(a *world.Atlas, p *bridges.Plugin) {
 	t := p.Types().Named(BridgeKind)
 	a.Add(t.Deck(), CellSize, deck).Lying().Edges(railing).
 		Styled(minimap.Mark{Color: deckColor, Size: 4})
-	a.Add(t.Pier(), CellSize, render.Solid(pierColor)).Upright()
+	a.AddBody(t.Pier(), CellSize, pierBody())
+}
+
+// pierBody is of stone on a footing under a cap across the deck, its heights shares of how high
+// it stands from its foot to the deck
+func pierBody() world.Body {
+	m := scale.Figure
+	return world.Body{
+		Wide:      m(1),
+		Tall:      m(4),
+		Stretched: true,
+		Parts: []world.Part{
+			{Shape: world.Box, To: [3]float32{0, 0, m(0.5)}, Wide: m(0.9), Tip: m(0.9)},
+			{Shape: world.Box, To: [3]float32{0, 0, m(4)}, Wide: m(0.625), Tip: m(0.625)},
+			{Shape: world.Box, From: [3]float32{0, 0, m(3.7)}, To: [3]float32{0, 0, m(4)},
+				Wide: m(0.75), Tip: m(1)},
+		},
+		Paints: []world.Paint{{Colour: pierColor, Dots: pierStoneColor}},
+	}
 }
 
 // authored running east
