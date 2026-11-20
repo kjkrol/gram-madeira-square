@@ -365,7 +365,15 @@ func defaultRecipe() recipe {
 	r.Roads.Bridge = 4
 	r.Roads.Longest = 3
 	r.Roads.High = 60
-	r.Tunnels = tunnelsCfg{Clear: 3, Width: 4, Cover: 5, Grade: 0.1, Longest: 40, Least: 2, Reshape: 60}
+	r.Tunnels = tunnelsCfg{
+		Clear:   3,
+		Width:   4,
+		Cover:   5,
+		Grade:   0.1,
+		Longest: 40,
+		Least:   2,
+		Reshape: 60,
+	}
 	return r
 }
 

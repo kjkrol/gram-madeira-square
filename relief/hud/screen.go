@@ -47,7 +47,8 @@ func Screen(d Deps) *ui.Element {
 		d.Feed,
 		ui.Drawer(d.Clock),
 		ui.TopRight(ui.Layers(
-			ui.Center(d.Minimap.Masked(ui.Circle).Border(minimapRim, 2)).Size(minimapSide, minimapSide),
+			ui.Center(d.Minimap.Masked(ui.Circle).Border(minimapRim, 2)).
+				Size(minimapSide, minimapSide),
 			d.Compass,
 		)).Size(minimapBox, minimapBox).Margin(16 - minimap.Overhang),
 		timeAndWeather(d),

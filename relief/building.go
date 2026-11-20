@@ -13,7 +13,23 @@ import (
 var (
 	ochre  = color.RGBA{R: 232, G: 204, B: 148, A: 255}
 	basalt = color.RGBA{R: 132, G: 126, B: 120, A: 255}
+	// the dark basalt of a house's plinth, its corners and the frames of its doors and windows
+	cantaria = color.RGBA{R: 86, G: 83, B: 79, A: 255}
 )
+
+// madeiran is how the island's houses are washed: the colours of the 2054 buildings OpenStreetMap
+// tags on Madeira (building:colour, 2026-11-20), the bright ones softened to pastels, white and
+// cream nearly two in three
+var madeiran = []buildings.Wash{
+	{Colour: color.RGBA{R: 247, G: 246, B: 240, A: 255}, Share: 30},
+	{Colour: color.RGBA{R: 246, G: 240, B: 212, A: 255}, Share: 34},
+	{Colour: color.RGBA{R: 239, G: 210, B: 164, A: 255}, Share: 9},
+	{Colour: color.RGBA{R: 239, G: 192, B: 180, A: 255}, Share: 8},
+	{Colour: color.RGBA{R: 242, G: 228, B: 162, A: 255}, Share: 7},
+	{Colour: color.RGBA{R: 216, G: 215, B: 210, A: 255}, Share: 7},
+	{Colour: color.RGBA{R: 183, G: 207, B: 224, A: 255}, Share: 3},
+	{Colour: color.RGBA{R: 198, G: 220, B: 188, A: 255}, Share: 2},
+}
 
 // how long and how wide a building stands, metres: no wider than the island's world holds a
 // thing, and narrow enough to leave its cell a yard
@@ -36,6 +52,8 @@ func (homes) Define(p *buildings.Plugin) {
 		Floors: 1,
 		Size:   size,
 		Walls:  wallColor,
+		Washes: madeiran,
+		Stone:  cantaria,
 		Tiles:  roofColor,
 		Bay:    m(2),
 		Parts:  []buildings.Part{{Roof: buildings.Hip, Pitch: 0.5}},
@@ -45,6 +63,8 @@ func (homes) Define(p *buildings.Plugin) {
 		Floors: 3,
 		Size:   size,
 		Walls:  ochre,
+		Washes: madeiran,
+		Stone:  cantaria,
 		Tiles:  roofColor,
 		Bay:    m(1.5),
 		Parts:  []buildings.Part{{Roof: buildings.Gable, Pitch: 0.45}},
@@ -54,6 +74,7 @@ func (homes) Define(p *buildings.Plugin) {
 		Floors: 1,
 		Size:   size,
 		Walls:  wallColor,
+		Stone:  cantaria,
 		Tiles:  roofColor,
 		Bay:    m(3),
 		Parts: []buildings.Part{
