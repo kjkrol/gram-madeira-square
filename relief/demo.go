@@ -137,8 +137,9 @@ func main() {
 			"widgets: apart, by the corners). Its forests and its settlements' yards are " +
 			"photographed into a sheet from afar, kept between runs, and plant their trees " +
 			"as the camera comes near; the settlements' buildings stand as solids at every " +
-			"distance, a cottage, a town's house or a chapel a built cell, their windows lit " +
-			"at dusk; caravans, a wagon and three porters, and " +
+			"distance, a cottage, a town's house or a chapel a built cell, washed white or in " +
+			"a pastel and dressed in basalt, their windows lit at dusk; caravans, a wagon and " +
+			"three porters, and " +
 			"travellers go to and fro along the roads, far off an icon of their kind a sector " +
 			"with their number over it (F10: points, the numbers off); a band of thirty " +
 			"walkers stands on the plateau, one icon far off, and a lookout at its eastern " +
@@ -280,6 +281,7 @@ func (a *arena) makePlugins(w *world.Plugin) {
 		Cell:        CellSize,
 		HeightUnit:  1,
 		Cage:        a.topography.Read(0),
+		Walls:       a.buildings.Read(0),
 		Levers:      []cameras.Lever{a.world.Bodies(), a.light.Write(), a.atmosphere.Write()},
 		Tactical:    cameras.Knobs{Strategy: cameras.InLayers, Layers: true},
 		Riding:      cameras.Knobs{Strategy: cameras.InLayers, Layers: true},
@@ -290,16 +292,18 @@ func (a *arena) makePlugins(w *world.Plugin) {
 		Turning: true,
 	})
 	a.telemetry = telemetry.NewPlugin(a.world).
-		With(a.atmosphere.Read(0).Reporter(), a.light.Read(0).Reporter(), a.topography.Read(0).Reporter(),
-			a.cameras.Read(0).Reporter(), a.nav.Read(0).Reporter(), a.world.Read(0).Sectors(),
-			a.world.Read(0).Seen())
+		With(a.atmosphere.Read(0).Reporter(), a.light.Read(0).Reporter(),
+			a.topography.Read(0).Reporter(), a.cameras.Read(0).Reporter(),
+			a.nav.Read(0).Reporter(), a.world.Read(0).Sectors(), a.world.Read(0).Seen())
 	a.players = players.NewPlugin(a.world, a.collision, a.cameras, a.board, a.selection,
 		a.nav, a.driving,
-		a.atmosphere, a.topography, a.vision, a.bridges, a.tunnels, a.minimap, a.light)
+		a.atmosphere, a.topography, a.buildings, a.vision, a.bridges, a.tunnels, a.minimap,
+		a.light)
 	a.light.Write().AdaptShadows(true)
 	a.atmosphere.Write().ShowClouds(atmosphere.AllBodies)
 	a.atmosphere.CastClouds(atmosphere.CloudShadows{Ground: true, Figures: true, High: true})
 	a.cameras.Write().ShowZones(true)
+	a.buildings.Write().OpenRooms(false)
 }
 
 func (a *arena) definePlayers() error {

@@ -11,8 +11,8 @@ import (
 )
 
 // what the tunnels are allowed, as the underground's site has it: their room and their width in
-// metres of a figure's life, the rock over the roof and the ground a head's levelling moves in metres, the
-// floor's rise over run, how many cells one runs under at most and at least
+// metres of a figure's life, the rock over the roof and the ground a head's levelling moves in
+// metres, the floor's rise over run, how many cells one runs under at most and at least
 type tunnelsCfg struct {
 	Clear   float64 `yaml:"clear"`
 	Width   float64 `yaml:"width"`
@@ -328,7 +328,8 @@ func (r *roads) held(l *layout) error {
 	for _, t := range r.tunnels {
 		g.but = t.plan.Storey
 		g.under = t.plan.Cells
-		if _, err := usite.Plan(g, r.tunnelRules(0), r.clear(), t.from, t.to, t.via...); err != nil {
+		_, err := usite.Plan(g, r.tunnelRules(0), r.clear(), t.from, t.to, t.via...)
+		if err != nil {
 			return err
 		}
 	}
