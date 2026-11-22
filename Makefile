@@ -6,6 +6,9 @@ GO = go
 GOEXPERIMENT ?= simd
 export GOEXPERIMENT
 
+# the map maker, a tool of its own
+GRAMAP ?= github.com/kjkrol/gramap@v0.1.0
+
 .PHONY: all relief relief-ghibli relief-widgets flat maps deps tidy build test clean
 
 all: build
@@ -25,8 +28,8 @@ flat: deps
 ## maps: makes both maps anew from the recipe; relief/map.yaml carries one line written by hand
 ## (the lantern after the bridge from [181, 73]), to be put back after it
 maps:
-	$(GO) run ./cmd/gramap -recipe cmd/gramap/madeira.yaml -out relief/map.yaml
-	$(GO) run ./cmd/gramap -recipe cmd/gramap/madeira.yaml -out flat/map.yaml -flat
+	$(GO) run $(GRAMAP) -recipe madeira.yaml -out relief/map.yaml
+	$(GO) run $(GRAMAP) -recipe madeira.yaml -out flat/map.yaml -flat
 
 deps:
 	$(GO) mod tidy

@@ -7,7 +7,6 @@ require (
 	github.com/kjkrol/ceremony v0.3.3
 	github.com/kjkrol/goke/v3 v3.6.1
 	github.com/kjkrol/gram v0.24.1
-	go.yaml.in/yaml/v3 v3.0.5
 	golang.org/x/image v0.46.0
 )
 
@@ -21,6 +20,7 @@ require (
 	github.com/gogpu/wgpu v0.34.15 // indirect
 	github.com/kjkrol/hpastar v1.6.1 // indirect
 	github.com/kjkrol/uid v1.3.0 // indirect
+	go.yaml.in/yaml/v3 v3.0.5 // indirect
 	golang.org/x/sys v0.48.0 // indirect
 	golang.org/x/text v0.42.0 // indirect
 )

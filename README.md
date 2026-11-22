@@ -19,33 +19,25 @@ hierarchy the long routes are climbed through).
 
 ## Maps of the Earth
 
-`cmd/gramap` makes a map a gram board lays of any stretch of the Earth at any scale out of a
-recipe (`cmd/gramap/madeira.yaml` is Madeira's):
+Both maps are made by [gramap](https://github.com/kjkrol/gramap), which makes a map a gram board
+lays of any stretch of the Earth at any scale out of a recipe; `madeira.yaml` is Madeira's:
 
 ```bash
-go run ./cmd/gramap -recipe cmd/gramap/madeira.yaml -out relief/map.yaml
-go run ./cmd/gramap -recipe cmd/gramap/madeira.yaml -out flat/map.yaml -flat
+make maps
+```
+
+which runs gramap at the version the Makefile names (`GRAMAP`):
+
+```bash
+go run github.com/kjkrol/gramap@v0.1.0 -recipe madeira.yaml -out relief/map.yaml
+go run github.com/kjkrol/gramap@v0.1.0 -recipe madeira.yaml -out flat/map.yaml -flat
 ```
 
 The recipe says where, how many cells and how many metres a cell spans, what the ground is by
-its slope and height, how much drained land makes a brook, a stream and a river, and the roads
-as chains of named places. The heights come from the
-[Terrain Tiles on AWS](https://registry.opendata.aws/terrain-tiles/), fetched once into the
-user's cache. The rivers are carved into the ground, the roads routed and graded as Transport
-Tycoon lays them, with bridges over water and down valleys and fords where a river is shallow;
-with `-flat` the map has no heights. With `bed: {zoom, deepest}` the sea has its bed, as deep
-as the tiles tell at a zoom that has the sea's depths (the fine ones have none), evened from the
-shore to there. With `source: osm` a map with relief follows
-[OpenStreetMap](https://www.openstreetmap.org/copyright) instead: its roads of the classes the
-recipe names, its bridges, its tunnels dug where the ground lets one lie, and its settlements
-where the buildings stand. With `cover: {source: corine}` it draws the land as
-[CORINE Land Cover](https://land.copernicus.eu/en/products/corine-land-cover) says, a kind of
-cell for the classes the recipe names, another within a Natura 2000 site (Madeira: laurisilva
-within its site, woodland, pinewood, heath and farmland). Its `fields:` lay a field entity over
-the cells of a kind, or of several, in each block where enough of them lie, its `settlements:`
-cells of a kind round the roads' places, as many as a place's size says in the recipe's own
-words (a hamlet, a village, a town); what grows and stands on them is the game's rules', as the
-fields unfold.
+its slope and height, how much drained land makes a brook, a stream and a river, and the roads:
+here OpenStreetMap's, with its bridges, tunnels and settlements, the land drawn as CORINE Land
+Cover says (laurisilva within its Natura 2000 site, woodland, pinewood, heath and farmland).
+What a recipe can say is gramap's README's.
 
 `relief/map.yaml` carries one line written by hand, the lantern after the bridge from
 `[181, 73]`: a map made anew gets it back by hand.
@@ -58,14 +50,14 @@ says. `make build` and `make test` build and test everything; the Makefile runs 
 
 # Credits
 
-- The heights of both maps and of every map `cmd/gramap` makes: the Terrain Tiles on AWS,
+- The heights of both maps and of every map gramap makes: the Terrain Tiles on AWS,
   Mapzen's Tilezen terrarium — SRTM, EU-DEM (Copernicus), GMTED2010, ETOPO1 and others; see their
   [attribution](https://github.com/tilezen/joerd/blob/master/docs/attribution.md).
 - The roads, tunnels, bridges and settlements of Madeira in relief (`relief/map.yaml`), and of
-  every map `cmd/gramap` makes with `source: osm`: ©
+  every map gramap makes with `source: osm`: ©
   [OpenStreetMap](https://www.openstreetmap.org/copyright) contributors, under the Open Database
   License.
-- What grows where on Madeira in relief, and on every map `cmd/gramap` makes with `cover:
+- What grows where on Madeira in relief, and on every map gramap makes with `cover:
   {source: corine}`: CORINE Land Cover 2018, © European Union, Copernicus Land Monitoring
   Service, European Environment Agency (EEA); the Natura 2000 sites, © EEA.
 - The ground's photographs (`relief/textures`): Poly Haven, CC0.
