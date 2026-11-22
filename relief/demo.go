@@ -83,8 +83,6 @@ const (
 	StartZoom = 0.15
 )
 
-// the map in metres and the level laid by it; map.yaml is the level file it takes over from
-//
 //go:embed geography.yaml geography
 var mapFile embed.FS
 

@@ -1,0 +1,11 @@
+# Made by gramap. Heights: Terrain Tiles on AWS (Mapzen's Tilezen
+# terrarium) — SRTM, EU-DEM, GMTED2010, ETOPO1 and others; see
+# https://github.com/tilezen/joerd/blob/master/docs/attribution.md
+# From madeira.yaml, flat.
+# 640 x 320 cells of 100 m; a world unit 2 m.
+size: [64000, 32000]
+features: features.geojson
+roads:
+  road:
+    lanes: 2
+    lane: 44

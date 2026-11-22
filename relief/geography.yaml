@@ -1,4 +1,4 @@
-# Made by cmd/gramap. Heights: Terrain Tiles on AWS (Mapzen's Tilezen
+# Made by gramap. Heights: Terrain Tiles on AWS (Mapzen's Tilezen
 # terrarium) — SRTM, EU-DEM, GMTED2010, ETOPO1 and others; see
 # https://github.com/tilezen/joerd/blob/master/docs/attribution.md
 # Roads, tunnels, bridges and buildings: © OpenStreetMap contributors, under the ODbL;
@@ -528,9 +528,9 @@ geography:
   tunnels: {road: tunnel}
   fords: ford
   rivers:
-    brook: {kind: brook, width: 12.93}
-    stream: {kind: stream, width: 20.54}
-    river: {kind: river, width: 30.96}
+    brook: brook
+    stream: stream
+    river: river
   areas:
     landcover=built: built
     landcover=earth: earth
