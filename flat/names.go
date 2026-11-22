@@ -10,14 +10,17 @@ const (
 	StreamCell = "stream"
 	RiverCell  = "river"
 	RoadCell   = "road"
+	BuiltCell  = "built"
 	IceCell    = "ice"
 
 	MortalRole = "mortal"
 
 	UnitKind = "unit"
 
-	BridgeKind = "bridge"
-	FordKind   = "ford"
+	BridgeKind     = "bridge"
+	FordKind       = "ford"
+	ForestKind     = "forest"
+	SettlementKind = "settlement"
 
 	PlayerSide = "player"
 
