@@ -7,7 +7,7 @@ GOEXPERIMENT ?= simd
 export GOEXPERIMENT
 
 # the map maker, a tool of its own
-GRAMAP ?= github.com/kjkrol/gramap@v0.2.1
+GRAMAP ?= github.com/kjkrol/gramap@v0.3.0
 
 .PHONY: all relief relief-ghibli relief-widgets flat maps deps tidy build test clean
 
@@ -25,12 +25,13 @@ relief-widgets: deps
 flat: deps
 	$(GO) run ./flat
 
-## maps: makes the maps anew from the recipe, the relief's in metres too (relief/geography and
-## relief/geography.yaml, what the demo lays); relief/geography.yaml and relief/map.yaml each
-## carry one line written by hand (the lantern after the bridge from [181, 73]), to be put back
+## maps: makes the maps anew from the recipe, each a folder in metres and the level over it
+## (geography and geography.yaml, what a demo lays), the units in the level kept;
+## relief/geography.yaml carries one line written by hand (the lantern after the bridge from
+## [181, 73]), to be put back
 maps:
-	$(GO) run $(GRAMAP) -recipe madeira.yaml -out relief/map.yaml -geography relief/geography
-	$(GO) run $(GRAMAP) -recipe madeira.yaml -out flat/map.yaml -flat
+	$(GO) run $(GRAMAP) -recipe madeira.yaml -geography relief/geography
+	$(GO) run $(GRAMAP) -recipe madeira.yaml -geography flat/geography -flat
 
 deps:
 	$(GO) mod tidy

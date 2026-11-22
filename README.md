@@ -29,16 +29,14 @@ make maps
 which runs gramap at the version the Makefile names (`GRAMAP`):
 
 ```bash
-go run github.com/kjkrol/gramap@v0.2.1 -recipe madeira.yaml -out relief/map.yaml \
-    -geography relief/geography
-go run github.com/kjkrol/gramap@v0.2.1 -recipe madeira.yaml -out flat/map.yaml -flat
+go run github.com/kjkrol/gramap@v0.3.0 -recipe madeira.yaml -geography relief/geography
+go run github.com/kjkrol/gramap@v0.3.0 -recipe madeira.yaml -geography flat/geography -flat
 ```
 
-Madeira in relief is laid by its map in metres: `relief/geography/`, the ground's heights as
-an image and what lies on it as GeoJSON (gram's `board/mapfile`), and `relief/geography.yaml`,
-the level over it. `relief/map.yaml` is the same map as the level file it takes over from,
-kept beside it till it can go; the units are written there and carried into
-`geography.yaml` as the maps are made.
+Each demo is laid by its map in metres: `geography/`, the ground's heights as an image (none
+on the flat board) and what lies on it as GeoJSON (gram's `board/mapfile`), and
+`geography.yaml`, the level over it, where the units are written; gramap keeps them as the
+maps are made.
 
 The recipe says where, how many cells and how many metres a cell spans, what the ground is by
 its slope and height, how much drained land makes a brook, a stream and a river, and the roads:
@@ -46,7 +44,7 @@ here OpenStreetMap's, with its bridges, tunnels and settlements, the land drawn 
 Cover says (laurisilva within its Natura 2000 site, woodland, pinewood, heath and farmland).
 What a recipe can say is gramap's README's.
 
-`relief/geography.yaml` and `relief/map.yaml` each carry one line written by hand, the lantern
+`relief/geography.yaml` carries one line written by hand, the lantern
 after the bridge from `[181, 73]` (`{kind: lantern, at: [184, 76]}` among the board's
 entities): a map made anew gets it back by hand.
 
@@ -61,7 +59,7 @@ says. `make build` and `make test` build and test everything; the Makefile runs 
 - The heights of both maps and of every map gramap makes: the Terrain Tiles on AWS,
   Mapzen's Tilezen terrarium — SRTM, EU-DEM (Copernicus), GMTED2010, ETOPO1 and others; see their
   [attribution](https://github.com/tilezen/joerd/blob/master/docs/attribution.md).
-- The roads, tunnels, bridges and settlements of Madeira in relief (`relief/map.yaml`), and of
+- The roads, tunnels, bridges and settlements of Madeira in relief (`relief/geography`), and of
   every map gramap makes with `source: osm`: ©
   [OpenStreetMap](https://www.openstreetmap.org/copyright) contributors, under the Open Database
   License.

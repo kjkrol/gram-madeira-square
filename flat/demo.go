@@ -44,7 +44,7 @@ const (
 	MaxEntCount  = 1024
 )
 
-//go:embed map.yaml
+//go:embed geography.yaml geography
 var mapFile embed.FS
 
 type arena struct {
@@ -78,6 +78,7 @@ func main() {
 	a := &arena{}
 	mainStage := stage.New(BoardStage).
 		World(world.Config{
+			Scale: world.Scale{Metres: 100.0 / CellSize},
 			Space: world.SpaceCfg{Width: WorldWidth, Height: WorldHeight},
 			Entities: world.EntitiesCfg{
 				MaxCount: MaxEntCount,
@@ -152,7 +153,7 @@ func (a *arena) defineFigures() {
 }
 
 func (a *arena) spawn() error {
-	level, err := a.board.Lay(mapFile, "map.yaml")
+	level, err := a.board.Lay(mapFile, "geography.yaml")
 	if err != nil {
 		return err
 	}
