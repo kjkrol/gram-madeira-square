@@ -41,7 +41,7 @@ const (
 	WorldHeight  = GridHeight * CellSize
 	ScreenWidth  = 1024
 	ScreenHeight = 768
-	MaxEntCount  = 256
+	MaxEntCount  = 1024
 )
 
 //go:embed map.yaml
@@ -146,7 +146,7 @@ func (a *arena) definePlayer() error {
 func (a *arena) defineFigures() {
 	a.board.Tiles(tiles()...)
 	a.board.Surfaces(surface{})
-	a.board.Figures(walker{}, ford{})
+	a.board.Figures(walker{}, ford{}, field{})
 	a.bridges.Figures(bridge{})
 	a.atmosphere.Skies(earth{})
 }
@@ -157,6 +157,9 @@ func (a *arena) spawn() error {
 		return err
 	}
 	if err := board.Spawn[fordRow](level, nil); err != nil {
+		return err
+	}
+	if err := board.Spawn[fieldRow](level, nil); err != nil {
 		return err
 	}
 	if err := a.bridges.Write().Spawn(level); err != nil {

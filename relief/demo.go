@@ -66,7 +66,7 @@ const (
 	ScreenWidth  = 1024
 	ScreenHeight = 768
 	// the trees and buildings unfolded round the camera and what walks among them
-	MaxEntCount = 40_000
+	MaxEntCount = 100_000
 
 	// a sector's side in cells, gramap's fields' grain: Buckets of the space's buckets, which
 	// MaxEntCount makes 64 world units a side
@@ -83,7 +83,9 @@ const (
 	StartZoom = 0.15
 )
 
-//go:embed map.yaml
+// the map in metres and the level laid by it; map.yaml is the level file it takes over from
+//
+//go:embed geography.yaml geography
 var mapFile embed.FS
 
 // A cell is 100 m of Madeira; the figures on it are drawn 15 times bigger than life.
@@ -457,7 +459,7 @@ func (a *arena) bindKeys() error {
 }
 
 func (a *arena) spawn() error {
-	level, err := a.board.Lay(mapFile, "map.yaml")
+	level, err := a.board.Lay(mapFile, "geography.yaml")
 	if err != nil {
 		return err
 	}

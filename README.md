@@ -6,7 +6,7 @@ engine and the tool that makes their maps of the real island.
 | Demo | What it shows |
 |---|---|
 | [`relief`](relief) | Madeira in relief, its true heights: light, water, the sea over its bed, roads, bridges and tunnels, the weather, the ground textured from photographs (`-look ghibli` paints it), forests and settlements as fields unfolding near and photographed into a sheet far off, the settlements' buildings as solids, caravans and travellers on the roads, the camera on a stick or behind a unit |
-| [`flat`](flat) | The same island on the simple map: a flat board, bands for the ways, bridges and fords, a minimap round the camera |
+| [`flat`](flat) | The same island on the simple map: a flat board, its settlements as cells of their own, bands for the ways, bridges and fords, a minimap round the camera |
 
 ```bash
 make relief           # -look ghibli: make relief-ghibli; -hud widgets: make relief-widgets
@@ -29,9 +29,16 @@ make maps
 which runs gramap at the version the Makefile names (`GRAMAP`):
 
 ```bash
-go run github.com/kjkrol/gramap@v0.1.0 -recipe madeira.yaml -out relief/map.yaml
-go run github.com/kjkrol/gramap@v0.1.0 -recipe madeira.yaml -out flat/map.yaml -flat
+go run github.com/kjkrol/gramap@v0.2.1 -recipe madeira.yaml -out relief/map.yaml \
+    -geography relief/geography
+go run github.com/kjkrol/gramap@v0.2.1 -recipe madeira.yaml -out flat/map.yaml -flat
 ```
+
+Madeira in relief is laid by its map in metres: `relief/geography/`, the ground's heights as
+an image and what lies on it as GeoJSON (gram's `board/mapfile`), and `relief/geography.yaml`,
+the level over it. `relief/map.yaml` is the same map as the level file it takes over from,
+kept beside it till it can go; the units are written there and carried into
+`geography.yaml` as the maps are made.
 
 The recipe says where, how many cells and how many metres a cell spans, what the ground is by
 its slope and height, how much drained land makes a brook, a stream and a river, and the roads:
@@ -39,8 +46,9 @@ here OpenStreetMap's, with its bridges, tunnels and settlements, the land drawn 
 Cover says (laurisilva within its Natura 2000 site, woodland, pinewood, heath and farmland).
 What a recipe can say is gramap's README's.
 
-`relief/map.yaml` carries one line written by hand, the lantern after the bridge from
-`[181, 73]`: a map made anew gets it back by hand.
+`relief/geography.yaml` and `relief/map.yaml` each carry one line written by hand, the lantern
+after the bridge from `[181, 73]` (`{kind: lantern, at: [184, 76]}` among the board's
+entities): a map made anew gets it back by hand.
 
 ## Building
 

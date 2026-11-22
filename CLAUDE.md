@@ -13,7 +13,8 @@ Their maps are made by [gramap](https://github.com/kjkrol/gramap) (locally
 Land Cover, as `madeira.yaml` says.
 
 - `relief/` — Madeira in relief (`demo.go` the Stage, `scene.go` how it looks, `names.go` its
-  names, a file a figure, `hud/` the hour and the weather on the glass, `map.yaml` the map).
+  names, a file a figure, `hud/` the hour and the weather on the glass, `geography.yaml` and
+  `geography/` the map).
 - `flat/` — the same island on a flat board.
 - `madeira.yaml` — the recipe of both maps, gramap's to read.
 
@@ -43,8 +44,11 @@ scripts pointed at this repository (`PROBE_DEMOS=<this folder>`, the demo dir `r
 
 - A change to a gram plugin these demos use is checked here too: the relief demo is the one
   place the ground, the sky, the forests and the towns run at an island's scale.
-- `relief/map.yaml` carries one line written by hand (the lantern after the bridge from
-  `[181, 73]`): put it back after `make maps`. gramap holds itself to Madeira made from
+- The relief demo lays `relief/geography.yaml` over `relief/geography/`, the map in metres
+  (gram's `board/mapfile`, written by gramap's `-geography`); `relief/map.yaml` is the level
+  file it takes over from, kept till the user says it goes, and where the units are written:
+  gramap carries them into `geography.yaml`. Both carry one line written by hand (the lantern
+  after the bridge from `[181, 73]`): put it back in each after `make maps`. gramap holds itself to Madeira made from
   its own copy of this recipe (`make madeira` there): a change to `madeira.yaml` here moves
   nothing there.
 - What the relief demo keeps between runs (the sheets, the routes' hierarchy) lies in the

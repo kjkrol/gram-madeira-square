@@ -27,6 +27,7 @@ var cellColors = map[string]color.RGBA{
 	RiverCell:  {R: 90, G: 145, B: 205, A: 255},
 	RoadCell:   {R: 165, G: 135, B: 95, A: 255},
 	ForestCell: {R: 30, G: 90, B: 45, A: 255},
+	BuiltCell:  {R: 158, G: 146, B: 124, A: 255},
 }
 
 var (
@@ -44,6 +45,7 @@ var (
 		SandCell:   {R: 238, G: 236, B: 225, A: 255},
 		RockCell:   {R: 205, G: 208, B: 212, A: 255},
 		ForestCell: {R: 150, G: 185, B: 165, A: 255},
+		BuiltCell:  {R: 226, G: 224, B: 220, A: 255},
 	}
 	iceColor = color.RGBA{R: 175, G: 210, B: 230, A: 255}
 )
